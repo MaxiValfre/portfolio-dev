@@ -19,7 +19,7 @@ Estoy siempre abierto/a a nuevas oportunidades y colaboraciones. Puedes contacta
 - **Correo electrónico:** [maximovalfre170@gmail.com]
 - **LinkedIn:** [https://www.linkedin.com/in/maxivalfre/]
 - **GitHub:** [https://github.com/MaxiValfre]
-- **Portfolio**[[https://github.com/MaxiValfre](https://quiet-pavlova-556f5a.netlify.app/)]
+- **Portfolio**[https://quiet-pavlova-556f5a.netlify.app/]
 
 ¡Gracias por visitar mi portafolio!
 
