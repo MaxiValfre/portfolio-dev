@@ -8,15 +8,6 @@ import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import CV from "../../docs/CV Maximo Valfre.pdf";
 
-
-const DownloadCV = () => {
-  const handleDownload = () => {
-    const link = document.createElement('a');
-    link.href = CV;
-    link.download = 'CV_Maximo_Valfre.pdf';
-    link.click();
-  };
-}
 ---
 
 <Layout title="Maxi Portfolio">
