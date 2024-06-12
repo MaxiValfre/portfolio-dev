@@ -11,7 +11,7 @@ import CV from "../../docs/CV Maximo Valfre.pdf";
 
 <Layout title="Maxi Portfolio">
   <Header />
-  <body class="flex flex-col min-h-[100dvh]">
+  <div class="flex flex-col min-h-[100dvh]">
     <main class="flex-1">
       <section
         id="about"
@@ -144,8 +144,8 @@ import CV from "../../docs/CV Maximo Valfre.pdf";
             GitHub
           </a>
           <a
-            onclick="copyToClipboard()"
-            class="cursor-pointer inline-flex h-8 items-center justify-center rounded-md bg-[#5d39c0] px-4 text-sm font-medium text-gray-50 shadow transition-colors hover:bg-[#8563D9] relative"
+            onclick="copyToClipboard(this)"
+            class="relative cursor-pointer inline-flex h-8 items-center justify-center rounded-md bg-[#5d39c0] px-4 text-sm font-medium text-gray-50 shadow transition-colors hover:bg-[#8563D9] w-[120px]"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -162,42 +162,18 @@ import CV from "../../docs/CV Maximo Valfre.pdf";
               <rect width="20" height="16" x="2" y="4" rx="2"></rect>
               <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
             </svg>
-            Email
+            <span
+              id="email-text"
+              class="transition-opacity duration-300 flex-1 text-center"
+              >Email</span
+            >
             <span
               id="copy-message"
-              class="absolute top-0 left-full ml-2 bg-[#5d39c0] text-white text-xs rounded-md px-1 py-2 opacity-0 transition-opacity duration-300"
+              class="absolute inset-0 flex items-center justify-center text-white text-sm font-medium rounded-md bg-[#5d39c0] opacity-0 transition-opacity duration-300"
               >¡Copiado!</span
             >
           </a>
         </div>
-        <style>
-          #copy-message {
-            opacity: 0;
-            transition: opacity 0.3s;
-          }
-
-          #copy-message.show {
-            opacity: 1;
-          }
-        </style>
-        <script is:inline>
-          function copyToClipboard() {
-            const email = "maximovalfre170@gmail.com";
-            const el = document.createElement("textarea");
-            el.value = email;
-            document.body.appendChild(el);
-            el.select();
-            document.execCommand("copy");
-            document.body.removeChild(el);
-
-            const message = document.getElementById("copy-message");
-            message.classList.add("show");
-
-            setTimeout(() => {
-              message.classList.remove("show");
-            }, 1000);
-          }
-        </script>
       </section>
 
       <section
@@ -212,5 +188,27 @@ import CV from "../../docs/CV Maximo Valfre.pdf";
       </section>
     </main>
     <Footer />
-  </body>
+  </div>
+  <script is:inline>
+    function copyToClipboard(button) {
+      const email = "maximovalfre170@gmail.com";
+      const el = document.createElement("textarea");
+      el.value = email;
+      document.body.appendChild(el);
+      el.select();
+      document.execCommand("copy");
+      document.body.removeChild(el);
+
+      const emailText = button.querySelector("#email-text");
+      const copyMessage = button.querySelector("#copy-message");
+
+      emailText.classList.add("opacity-0");
+      copyMessage.classList.add("opacity-100");
+
+      setTimeout(() => {
+        copyMessage.classList.remove("opacity-100");
+        emailText.classList.remove("opacity-0");
+      }, 1000);
+    }
+  </script>
 </Layout>
