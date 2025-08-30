@@ -9,7 +9,7 @@ Soy apasionado por la programacion. Me encanta aprender y enfrentar nuevos desaf
 ## Habilidades
 
 - **Lenguajes de programación:** [HTML, CSS, JS, PYTHON]
-- **Herramientas y tecnologías:** [REACT, ASTRO, ANGULAR, TAILWIND, BOOSTRAP,SHADCN]
+- **Herramientas y tecnologías:** [NEXTJS, REACT, ASTRO, ANGULAR, TAILWIND, BOOSTRAP,SHADCN]
 - **Habilidades adicionales:** [Compañerismo,Respeto,Aprendizaje Rapido]
 
 ## Contacto
