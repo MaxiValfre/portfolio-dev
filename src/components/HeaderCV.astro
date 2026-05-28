@@ -52,13 +52,24 @@
         <script is:inline>
           document.getElementById('btn-download-cv').addEventListener('click', function() {
             var el = document.querySelector('main > div');
+            var elHeight = el.scrollHeight;
+            var elWidth = el.scrollWidth;
+            // A4 in px at 96dpi: 794 x 1123. We want everything in one page.
+            var a4Height = 1123;
+            var a4Width = 794;
+            // Calculate scale to fit content into one A4 page
+            var scaleY = a4Height / elHeight;
+            var scaleX = a4Width / elWidth;
+            var fitScale = Math.min(scaleX, scaleY, 1);
+            // Use custom page size matching the element aspect ratio scaled to fit
+            var pdfWidth = elWidth * fitScale;
+            var pdfHeight = elHeight * fitScale;
             html2pdf().set({
-              margin: [2, 2, 2, 2],
+              margin: 0,
               filename: 'CV_Maximo_Valfre.pdf',
               image: { type: 'jpeg', quality: 0.98 },
-              html2canvas: { scale: 2, useCORS: true, backgroundColor: null },
-              jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
-              pagebreak: { mode: ['avoid-all'] }
+              html2canvas: { scale: 2, useCORS: true, backgroundColor: null, width: elWidth, height: elHeight },
+              jsPDF: { unit: 'px', format: [pdfWidth, pdfHeight], orientation: 'portrait', hotfixes: ['px_scaling'] }
             }).from(el).save();
           });
         </script>
