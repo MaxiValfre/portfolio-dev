@@ -60,28 +60,22 @@
 
             var a4W = 210;
             var a4H = 297;
-            var margin = 5;
+            var margin = 6;
             var contentW = a4W - (margin * 2);
-            var contentH = a4H - (margin * 2);
+            var pageH = a4H - (margin * 2);
 
             html2canvas(el, {
               scale: 2,
               useCORS: true,
               backgroundColor: null
             }).then(function(canvas) {
-              var imgData = canvas.toDataURL('image/jpeg', 0.98);
               var imgW = canvas.width;
               var imgH = canvas.height;
 
-              var ratioW = contentW / imgW;
-              var ratioH = contentH / imgH;
-              var ratio = Math.min(ratioW, ratioH);
-
-              var finalW = imgW * ratio;
+              // Scale image width to fit A4 content width
+              var ratio = contentW / imgW;
+              var finalW = contentW;
               var finalH = imgH * ratio;
-
-              var offsetX = margin + (contentW - finalW) / 2;
-              var offsetY = margin + (contentH - finalH) / 2;
 
               var pdf = new window.jspdf.jsPDF({
                 unit: 'mm',
@@ -89,7 +83,34 @@
                 orientation: 'portrait'
               });
 
-              pdf.addImage(imgData, 'JPEG', offsetX, offsetY, finalW, finalH);
+              // Split into pages
+              var position = 0;
+              var remaining = finalH;
+              var pageNum = 0;
+
+              while (remaining > 0) {
+                if (pageNum > 0) pdf.addPage();
+
+                // Calculate source crop in canvas pixels
+                var srcY = (position / ratio) * 2; // *2 because scale:2
+                var srcH = Math.min(pageH / ratio, (remaining / ratio)) * 2;
+
+                // Create a cropped canvas for this page
+                var pageCanvas = document.createElement('canvas');
+                pageCanvas.width = imgW * 2; // scale:2
+                pageCanvas.height = srcH;
+                var ctx = pageCanvas.getContext('2d');
+                ctx.drawImage(canvas, 0, srcY, imgW * 2, srcH, 0, 0, imgW * 2, srcH);
+
+                var pageImg = pageCanvas.toDataURL('image/jpeg', 0.98);
+                var drawH = Math.min(pageH, remaining);
+                pdf.addImage(pageImg, 'JPEG', margin, margin, finalW, drawH);
+
+                position += pageH;
+                remaining -= pageH;
+                pageNum++;
+              }
+
               pdf.save('CV_Maximo_Valfre.pdf');
 
               btn.innerHTML = originalHTML;
