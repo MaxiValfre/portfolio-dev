@@ -26,7 +26,7 @@
     <nav class="hidden md:flex items-center gap-3 text-sm">
       <div class="flex items-center gap-2">
         <button
-          onclick="window.print()"
+          id="btn-download-cv"
           class="no-print inline-flex h-8 items-center justify-center rounded-md bg-[#5d39c0] px-3 text-sm font-medium text-gray-50 shadow transition-colors hover:bg-[#8563D9]"
         >
           <svg
@@ -48,6 +48,20 @@
           </svg>
           Descargar CV
         </button>
+        <script is:inline src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous"></script>
+        <script is:inline>
+          document.getElementById('btn-download-cv').addEventListener('click', function() {
+            var el = document.querySelector('main > div');
+            html2pdf().set({
+              margin: [2, 2, 2, 2],
+              filename: 'CV_Maximo_Valfre.pdf',
+              image: { type: 'jpeg', quality: 0.98 },
+              html2canvas: { scale: 2, useCORS: true, backgroundColor: null },
+              jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+              pagebreak: { mode: ['avoid-all'] }
+            }).from(el).save();
+          });
+        </script>
         <a
           class="inline-flex h-8 items-center justify-center rounded-md bg-[#5d39c0] px-4 text-sm font-medium text-gray-50 shadow transition-colors hover:bg-[#8563D9]"
           href="/"
