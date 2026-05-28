@@ -48,22 +48,22 @@
           </svg>
           Descargar CV
         </button>
-        <script is:inline src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous"></script>
+        <script is:inline src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+        <script is:inline src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
         <script is:inline>
           document.getElementById('btn-download-cv').addEventListener('click', function() {
             var el = document.querySelector('main > div');
             var btn = document.getElementById('btn-download-cv');
+            var originalHTML = btn.innerHTML;
             btn.textContent = 'Generando...';
             btn.disabled = true;
 
-            // A4 dimensions in mm
             var a4W = 210;
             var a4H = 297;
-            var margin = 5; // mm
-            var contentW = a4W - (margin * 2); // usable width in mm
-            var contentH = a4H - (margin * 2); // usable height in mm
+            var margin = 5;
+            var contentW = a4W - (margin * 2);
+            var contentH = a4H - (margin * 2);
 
-            // Capture at scale 2 for quality
             html2canvas(el, {
               scale: 2,
               useCORS: true,
@@ -73,7 +73,6 @@
               var imgW = canvas.width;
               var imgH = canvas.height;
 
-              // Calculate ratio to fit in A4 content area
               var ratioW = contentW / imgW;
               var ratioH = contentH / imgH;
               var ratio = Math.min(ratioW, ratioH);
@@ -81,11 +80,10 @@
               var finalW = imgW * ratio;
               var finalH = imgH * ratio;
 
-              // Center on page
               var offsetX = margin + (contentW - finalW) / 2;
               var offsetY = margin + (contentH - finalH) / 2;
 
-              var pdf = new jspdf.jsPDF({
+              var pdf = new window.jspdf.jsPDF({
                 unit: 'mm',
                 format: 'a4',
                 orientation: 'portrait'
@@ -94,7 +92,11 @@
               pdf.addImage(imgData, 'JPEG', offsetX, offsetY, finalW, finalH);
               pdf.save('CV_Maximo_Valfre.pdf');
 
-              btn.innerHTML = '<svg class="w-5 h-5 mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 4h3a1 1 0 0 1 1 1v15a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h3m0 3h6m-6 5h6m-6 4h6M10 3v4h4V3h-4Z"></path></svg>Descargar CV';
+              btn.innerHTML = originalHTML;
+              btn.disabled = false;
+            }).catch(function(err) {
+              console.error('PDF generation failed:', err);
+              btn.innerHTML = originalHTML;
               btn.disabled = false;
             });
           });
