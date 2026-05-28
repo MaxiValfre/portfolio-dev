@@ -52,25 +52,51 @@
         <script is:inline>
           document.getElementById('btn-download-cv').addEventListener('click', function() {
             var el = document.querySelector('main > div');
-            var elHeight = el.scrollHeight;
-            var elWidth = el.scrollWidth;
-            // A4 in px at 96dpi: 794 x 1123. We want everything in one page.
-            var a4Height = 1123;
-            var a4Width = 794;
-            // Calculate scale to fit content into one A4 page
-            var scaleY = a4Height / elHeight;
-            var scaleX = a4Width / elWidth;
-            var fitScale = Math.min(scaleX, scaleY, 1);
-            // Use custom page size matching the element aspect ratio scaled to fit
-            var pdfWidth = elWidth * fitScale;
-            var pdfHeight = elHeight * fitScale;
-            html2pdf().set({
-              margin: 0,
-              filename: 'CV_Maximo_Valfre.pdf',
-              image: { type: 'jpeg', quality: 0.98 },
-              html2canvas: { scale: 2, useCORS: true, backgroundColor: null, width: elWidth, height: elHeight },
-              jsPDF: { unit: 'px', format: [pdfWidth, pdfHeight], orientation: 'portrait', hotfixes: ['px_scaling'] }
-            }).from(el).save();
+            var btn = document.getElementById('btn-download-cv');
+            btn.textContent = 'Generando...';
+            btn.disabled = true;
+
+            // A4 dimensions in mm
+            var a4W = 210;
+            var a4H = 297;
+            var margin = 5; // mm
+            var contentW = a4W - (margin * 2); // usable width in mm
+            var contentH = a4H - (margin * 2); // usable height in mm
+
+            // Capture at scale 2 for quality
+            html2canvas(el, {
+              scale: 2,
+              useCORS: true,
+              backgroundColor: null
+            }).then(function(canvas) {
+              var imgData = canvas.toDataURL('image/jpeg', 0.98);
+              var imgW = canvas.width;
+              var imgH = canvas.height;
+
+              // Calculate ratio to fit in A4 content area
+              var ratioW = contentW / imgW;
+              var ratioH = contentH / imgH;
+              var ratio = Math.min(ratioW, ratioH);
+
+              var finalW = imgW * ratio;
+              var finalH = imgH * ratio;
+
+              // Center on page
+              var offsetX = margin + (contentW - finalW) / 2;
+              var offsetY = margin + (contentH - finalH) / 2;
+
+              var pdf = new jspdf.jsPDF({
+                unit: 'mm',
+                format: 'a4',
+                orientation: 'portrait'
+              });
+
+              pdf.addImage(imgData, 'JPEG', offsetX, offsetY, finalW, finalH);
+              pdf.save('CV_Maximo_Valfre.pdf');
+
+              btn.innerHTML = '<svg class="w-5 h-5 mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 4h3a1 1 0 0 1 1 1v15a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h3m0 3h6m-6 5h6m-6 4h6M10 3v4h4V3h-4Z"></path></svg>Descargar CV';
+              btn.disabled = false;
+            });
           });
         </script>
         <a
