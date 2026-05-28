@@ -95,12 +95,13 @@ import Footer from "../components/Footer.astro";
       <section class="mt-8">
         <h2 class="text-2xl font-bold">Perfil</h2>
         <p class="mt-4 text-gray-400">
-          Desarrollador Full Stack con experiencia real en sistemas en producción.
-          He trabajado en el desarrollo de aplicaciones web completas, abarcando
-          frontend, backend, bases de datos y servicios cloud. Cuento con experiencia
-          en arquitecturas serverless, integración de APIs, automatización de procesos
-          y despliegue continuo, con foco en soluciones funcionales orientadas al
-          negocio.
+          Desarrollador Full Stack con experiencia real en sistemas en producción,
+          automatización de procesos e integración de inteligencia artificial.
+          Trabajo en el desarrollo de aplicaciones web, microservicios, pipelines
+          de datos y agentes inteligentes, combinando Node.js, Python y servicios
+          cloud. Utilizo herramientas de IA (Claude, Copilot) como parte de mi
+          flujo de trabajo diario para desarrollo asistido y planificación
+          estructurada.
         </p>
       </section>
 
@@ -115,33 +116,78 @@ import Footer from "../components/Footer.astro";
               Fundación Educativa Saberes · 2024 – Actualidad
             </p>
 
-            <ul class="list-disc pl-6 mt-3 space-y-2 text-gray-400">
+            <h4 class="text-lg font-semibold mt-4">Plataforma Web</h4>
+            <ul class="list-disc pl-6 mt-2 space-y-2 text-gray-400">
               <li>
-                Desarrollo de un sistema de gestión e informe de pagos para estudiantes,
-                incluyendo esquemas de cuotas, carga de comprobantes y seguimiento de
-                pagos.
+                Sistema de gestión de pagos para estudiantes con esquemas de cuotas,
+                carga de comprobantes y seguimiento, más backoffice administrativo
+                de conciliación bancaria.
               </li>
               <li>
-                Implementación de backoffice administrativo para validación y
-                conciliación de pagos con movimientos bancarios.
+                Sistema de gestión de gastos con imputación multinivel (empresa,
+                organización, comisión, persona).
               </li>
               <li>
-                Frontend desarrollado con <strong>Next.js, Tailwind CSS y shadcn/ui</strong>.
+                Frontend con <strong>Next.js, Tailwind CSS y shadcn/ui</strong>.
+                Backend serverless con <strong>AWS Lambda, API Gateway y S3</strong>.
+                API REST con <strong>Node.js, Express y Sequelize</strong>.
+                Base de datos <strong>SQL Server</strong>.
+              </li>
+            </ul>
+
+            <h4 class="text-lg font-semibold mt-4">Microservicios y Automatización</h4>
+            <ul class="list-disc pl-6 mt-2 space-y-2 text-gray-400">
+              <li>
+                Monorepo de microservicios <strong>Node.js</strong> corriendo como
+                Windows Services en VPS con deploy automatizado (PowerShell).
               </li>
               <li>
-                Backend basado en arquitectura <strong>serverless</strong> utilizando
-                AWS Lambda, API Gateway y S3, integrado con base de datos SQL Server.
+                Servicio de verificación OCR de comprobantes bancarios con
+                <strong>OpenAI GPT</strong>: extracción y validación de montos,
+                fechas y DNI/CUIT contra la base de datos, con auto-corrección y
+                reglas de confianza.
               </li>
               <li>
-                Desarrollo de un sistema de gestión de gastos con múltiples niveles de
-                imputación (empresa, organización, comisión y persona).
+                Servicio de envío masivo de emails con rate limiting por perfil
+                SMTP, reprogramación automática por cuota y umbral diario por
+                campaña.
               </li>
               <li>
-                Backend con <strong>Node.js, Express y Sequelize</strong>, conectado a
-                SQL Server.
+                Sincronización <strong>SQL Server → Google Sheets</strong>
+                multi-pestaña con escritura chunked, retry/backoff y protección
+                de columnas con ARRAYFORMULA.
+              </li>
+            </ul>
+
+            <h4 class="text-lg font-semibold mt-4">Agente de Conciliación Inteligente (Python)</h4>
+            <ul class="list-disc pl-6 mt-2 space-y-2 text-gray-400">
+              <li>
+                Pipeline de conciliación de pagos que compara <strong>SQL Server</strong>
+                contra <strong>Google Sheets</strong>, con motor de allocación,
+                scoring graduado y escalación a LLM (<strong>GPT-4o</strong>) para
+                casos ambiguos.
               </li>
               <li>
-                Implementación de procesos de <strong>deploy y CI/CD</strong>.
+                Arquitectura de 5 capas: Connectors → Rules → Comparator → Agent
+                → Writer, con modelos <strong>Pydantic v2</strong>, caché de
+                decisiones y patches idempotentes.
+              </li>
+              <li>
+                +125 tests unitarios con <strong>pytest</strong>. CLI con
+                <strong>Click</strong>. Base de auditoría en <strong>SQLite</strong>.
+              </li>
+            </ul>
+
+            <h4 class="text-lg font-semibold mt-4">Automatización de Procesos</h4>
+            <ul class="list-disc pl-6 mt-2 space-y-2 text-gray-400">
+              <li>
+                Flujos con <strong>Make</strong> para mensajería automática vía
+                <strong>WhatsApp Business API</strong> (bienvenida, notificaciones
+                por eventos, plantillas dinámicas JSON).
+              </li>
+              <li>
+                Webhooks para eventos de mensajería y pagos. Procesamiento de
+                datos desde SQL y APIs para mensajes personalizados.
               </li>
             </ul>
           </div>
@@ -152,51 +198,31 @@ import Footer from "../components/Footer.astro";
 
             <ul class="list-disc pl-6 mt-3 space-y-2 text-gray-400">
               <li>
-                Desarrollo de una aplicación web utilizando HTML, CSS y JavaScript puro.
+                Aplicación web con <strong>HTML, CSS y JavaScript</strong>.
+                Backend con <strong>Firebase</strong> (Authentication, Firestore,
+                Realtime Database, Storage).
               </li>
               <li>
-                Backend con Firebase (Authentication, Firestore, Realtime Database y
-                Storage).
+                Sistema de likes, presencia en tiempo real y gestión de perfiles.
               </li>
               <li>
-                Implementación de sistema de likes, presencia en tiempo real y gestión
-                de perfiles.
+                Integración de pagos con <strong>Mercado Pago</strong> mediante
+                webhooks.
               </li>
               <li>
-                Integración de pagos con Mercado Pago mediante webhooks.
-              </li>
-              <li>
-                Migración a Capacitor y publicación en Play Store.
+                Migración a <strong>Capacitor</strong> y publicación en
+                <strong>Play Store</strong>.
               </li>
             </ul>
           </div>
         </div>
       </section>
 
-      <!-- AUTOMATIZACIONES -->
-      <section class="mt-8">
-        <h2 class="text-2xl font-bold">Automatización de Procesos</h2>
-
-        <ul class="list-disc pl-6 mt-4 space-y-2 text-gray-400">
-          <li>
-            Implementación de flujos de automatización con Make para mensajería
-            automática vía WhatsApp Business API.
-          </li>
-          <li>
-            Creación de sistemas de notificación masiva por eventos (cancelaciones,
-            avisos urgentes), evitando comunicación manual.
-          </li>
-          <li>
-            Integración de plantillas dinámicas y manejo de datos desde bases SQL y APIs.
-          </li>
-        </ul>
-      </section>
-
       <!-- HABILIDADES -->
       <section class="mt-8">
         <h2 class="text-2xl font-bold">Habilidades Técnicas</h2>
 
-        <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mt-4">
+        <div class="grid grid-cols-2 gap-4 mt-4">
           <div class="bg-gray-800 p-4 rounded-md">
             <h3 class="font-semibold">Frontend</h3>
             <p class="mt-2 text-gray-400">
@@ -207,14 +233,21 @@ import Footer from "../components/Footer.astro";
           <div class="bg-gray-800 p-4 rounded-md">
             <h3 class="font-semibold">Backend & Cloud</h3>
             <p class="mt-2 text-gray-400">
-              Node.js, Express, AWS Lambda, API Gateway, S3, Firebase
+              Node.js, Express, Python, AWS Lambda, API Gateway, S3, Firebase
             </p>
           </div>
 
           <div class="bg-gray-800 p-4 rounded-md">
-            <h3 class="font-semibold">Datos & DevOps</h3>
+            <h3 class="font-semibold">AI & Automation</h3>
             <p class="mt-2 text-gray-400">
-              SQL Server, Sequelize, Docker, CI/CD, Git
+              OpenAI API (GPT-4o, Vision), Claude, Copilot, Make, WhatsApp Business API
+            </p>
+          </div>
+
+          <div class="bg-gray-800 p-4 rounded-md">
+            <h3 class="font-semibold">Data & DevOps</h3>
+            <p class="mt-2 text-gray-400">
+              SQL Server, SQLite, Sequelize, Pydantic, Google Sheets API, Docker, CI/CD, Git
             </p>
           </div>
         </div>
