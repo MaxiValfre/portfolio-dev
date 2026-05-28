@@ -26,7 +26,7 @@
     <nav class="hidden md:flex items-center gap-3 text-sm">
       <div class="flex items-center gap-2">
         <button
-          id="btn-download-cv"
+          onclick="window.print()"
           class="no-print inline-flex h-8 items-center justify-center rounded-md bg-[#5d39c0] px-3 text-sm font-medium text-gray-50 shadow transition-colors hover:bg-[#8563D9]"
         >
           <svg
@@ -48,80 +48,6 @@
           </svg>
           Descargar CV
         </button>
-        <script is:inline src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-        <script is:inline src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-        <script is:inline>
-          document.getElementById('btn-download-cv').addEventListener('click', function() {
-            var el = document.querySelector('main > div');
-            var btn = document.getElementById('btn-download-cv');
-            var originalHTML = btn.innerHTML;
-            btn.textContent = 'Generando...';
-            btn.disabled = true;
-
-            var a4W = 210;
-            var a4H = 297;
-            var margin = 6;
-            var contentW = a4W - (margin * 2);
-            var pageH = a4H - (margin * 2);
-
-            html2canvas(el, {
-              scale: 2,
-              useCORS: true,
-              backgroundColor: null
-            }).then(function(canvas) {
-              var imgW = canvas.width;
-              var imgH = canvas.height;
-
-              // Scale image width to fit A4 content width
-              var ratio = contentW / imgW;
-              var finalW = contentW;
-              var finalH = imgH * ratio;
-
-              var pdf = new window.jspdf.jsPDF({
-                unit: 'mm',
-                format: 'a4',
-                orientation: 'portrait'
-              });
-
-              // Split into pages
-              var position = 0;
-              var remaining = finalH;
-              var pageNum = 0;
-
-              while (remaining > 0) {
-                if (pageNum > 0) pdf.addPage();
-
-                // Calculate source crop in canvas pixels
-                var srcY = (position / ratio) * 2; // *2 because scale:2
-                var srcH = Math.min(pageH / ratio, (remaining / ratio)) * 2;
-
-                // Create a cropped canvas for this page
-                var pageCanvas = document.createElement('canvas');
-                pageCanvas.width = imgW * 2; // scale:2
-                pageCanvas.height = srcH;
-                var ctx = pageCanvas.getContext('2d');
-                ctx.drawImage(canvas, 0, srcY, imgW * 2, srcH, 0, 0, imgW * 2, srcH);
-
-                var pageImg = pageCanvas.toDataURL('image/jpeg', 0.98);
-                var drawH = Math.min(pageH, remaining);
-                pdf.addImage(pageImg, 'JPEG', margin, margin, finalW, drawH);
-
-                position += pageH;
-                remaining -= pageH;
-                pageNum++;
-              }
-
-              pdf.save('CV_Maximo_Valfre.pdf');
-
-              btn.innerHTML = originalHTML;
-              btn.disabled = false;
-            }).catch(function(err) {
-              console.error('PDF generation failed:', err);
-              btn.innerHTML = originalHTML;
-              btn.disabled = false;
-            });
-          });
-        </script>
         <a
           class="inline-flex h-8 items-center justify-center rounded-md bg-[#5d39c0] px-4 text-sm font-medium text-gray-50 shadow transition-colors hover:bg-[#8563D9]"
           href="/"
