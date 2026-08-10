@@ -95,14 +95,12 @@ import Footer from "../components/Footer.astro";
       <section class="mt-8">
         <h2 class="text-2xl font-bold">Perfil</h2>
         <p class="mt-4 text-gray-400">
-          Desarrollador Full Stack con experiencia real en sistemas en producción,
-          automatización de procesos e integración de inteligencia artificial.
-          Trabajo en el desarrollo de aplicaciones web, microservicios, pipelines
-          de datos y agentes inteligentes, combinando Node.js, Python y servicios
-          cloud.           Utilizo IA como parte integral de mi flujo de trabajo: Claude y
-          GPT para asistencia, opencode como agente de desarrollo, y
-          metodologías como Spec-Driven Development con memoria persistente
-          para planificación estructurada de cambios complejos.
+          Desarrollador Full Stack con 3 años de experiencia construyendo y
+          manteniendo sistemas en producción. Trabajo end-to-end: frontend con
+          Next.js y React, backend en Node.js y Python, y despliegue sobre AWS.
+          Buena parte de lo que hago es tomar procesos manuales del negocio y
+          convertirlos en sistemas confiables, integrando modelos de lenguaje
+          donde aportan valor concreto.
         </p>
       </section>
 
@@ -117,106 +115,86 @@ import Footer from "../components/Footer.astro";
               Fundación Educativa Saberes · 2024 – Actualidad
             </p>
 
-            <h4 class="text-lg font-semibold mt-4">Plataforma Web</h4>
-            <ul class="list-disc pl-6 mt-2 space-y-2 text-gray-400">
-              <li>
-                Sistema de gestión de pagos para estudiantes con esquemas de cuotas,
-                carga de comprobantes y seguimiento, más backoffice administrativo
-                de conciliación bancaria.
-              </li>
-              <li>
-                Sistema de gestión de gastos con imputación multinivel (empresa,
-                organización, comisión, persona).
-              </li>
-              <li>
-                Frontend con <strong>Next.js, Tailwind CSS y shadcn/ui</strong>.
-                Backend serverless con <strong>AWS Lambda, API Gateway y S3</strong>.
-                API REST con <strong>Node.js, Express y Sequelize</strong>.
-                Base de datos <strong>SQL Server</strong>.
-              </li>
-            </ul>
+            <p class="mt-3 text-gray-400">
+              Responsable del desarrollo y mantenimiento de la plataforma interna
+              y sus servicios de soporte.
+            </p>
 
-            <h4 class="text-lg font-semibold mt-4">Microservicios y Automatización</h4>
-            <ul class="list-disc pl-6 mt-2 space-y-2 text-gray-400">
+            <ul class="list-disc pl-6 mt-3 space-y-3 text-gray-400">
               <li>
-                Monorepo de microservicios <strong>Node.js</strong> corriendo como
-                Windows Services en VPS con deploy automatizado (PowerShell).
+                <strong>Plataforma de pagos y gastos.</strong> Sistema de cuotas
+                para estudiantes con carga de comprobantes y backoffice de
+                conciliación bancaria, más un módulo de gastos con imputación
+                multinivel. Frontend en <strong>Next.js + Tailwind</strong>, API
+                REST con <strong>Node.js, Express y Sequelize</strong> sobre
+                <strong>SQL Server</strong>, y funciones serverless en
+                <strong>AWS Lambda, API Gateway y S3</strong>.
               </li>
               <li>
-                Servicio de verificación OCR de comprobantes bancarios con
-                <strong>OpenAI GPT</strong>: extracción y validación de montos,
-                fechas y DNI/CUIT contra la base de datos, con auto-corrección y
-                reglas de confianza.
+                <strong>Automatización de la conciliación de pagos.</strong>
+                Reemplacé un cruce manual entre la base de datos y las planillas
+                del área administrativa por un pipeline en <strong>Python</strong>
+                que resuelve automáticamente los casos claros y escala a revisión
+                humana solo los ambiguos, apoyándose en <strong>GPT-4o</strong>.
+                Diseñado en capas separadas para poder cambiar el modelo o la
+                fuente de datos sin tocar el resto.
               </li>
               <li>
-                Servicio de envío masivo de emails con rate limiting por perfil
-                SMTP, reprogramación automática por cuota y umbral diario por
-                campaña.
+                <strong>Microservicios de soporte.</strong> Monorepo en
+                <strong>Node.js</strong> con deploy automatizado: verificación OCR
+                de comprobantes bancarios con <strong>OpenAI</strong> que valida
+                montos, fechas y datos fiscales contra la base; envío masivo de
+                emails con control de cuota; y sincronización periódica de
+                <strong>SQL Server → Google Sheets</strong>.
               </li>
               <li>
-                Sincronización <strong>SQL Server → Google Sheets</strong>
-                multi-pestaña con escritura chunked, retry/backoff y protección
-                de columnas.
-              </li>
-            </ul>
-
-            <h4 class="text-lg font-semibold mt-4">Agente de Conciliación Inteligente (Python)</h4>
-            <ul class="list-disc pl-6 mt-2 space-y-2 text-gray-400">
-              <li>
-                Pipeline de conciliación de pagos que compara <strong>SQL Server</strong>
-                contra <strong>Google Sheets</strong>, con motor de allocación,
-                scoring graduado y escalación a LLM (<strong>GPT-4o</strong>) para
-                casos ambiguos.
-              </li>
-              <li>
-                Arquitectura de 5 capas: Connectors → Rules → Comparator → Agent
-                → Writer, con modelos <strong>Pydantic v2</strong>, caché de
-                decisiones y patches idempotentes.
-              </li>
-              <li>
-                +125 tests unitarios con <strong>pytest</strong>. CLI con
-                <strong>Click</strong>. Base de auditoría en <strong>SQLite</strong>.
-              </li>
-            </ul>
-
-            <h4 class="text-lg font-semibold mt-4">Automatización de Procesos</h4>
-            <ul class="list-disc pl-6 mt-2 space-y-2 text-gray-400">
-              <li>
-                Flujos con <strong>Make</strong> para mensajería automática vía
-                <strong>WhatsApp Business API</strong> (bienvenida, notificaciones
-                por eventos, plantillas dinámicas JSON).
-              </li>
-              <li>
-                Webhooks para eventos de mensajería y pagos. Procesamiento de
-                datos desde SQL y APIs para mensajes personalizados.
+                <strong>Mensajería automática.</strong> Flujos de
+                <strong>WhatsApp Business API</strong> para onboarding y
+                notificaciones por evento, conectados por webhooks a los eventos
+                de la plataforma.
               </li>
             </ul>
           </div>
 
           <div>
             <h3 class="text-xl font-semibold">Freelance Developer</h3>
-            <p class="text-gray-400">Aplicación de citas</p>
+            <p class="text-gray-400">Aplicación de citas · 2023</p>
 
             <ul class="list-disc pl-6 mt-3 space-y-2 text-gray-400">
               <li>
-                Aplicación web con <strong>HTML, CSS y JavaScript</strong>.
-                Backend con <strong>Firebase</strong> (Authentication, Firestore,
-                Realtime Database, Storage).
-              </li>
-              <li>
-                Sistema de likes, presencia en tiempo real y gestión de perfiles.
+                Aplicación web con <strong>Firebase</strong> (Authentication,
+                Firestore, Realtime Database, Storage): gestión de perfiles,
+                sistema de likes y presencia en tiempo real.
               </li>
               <li>
                 Integración de pagos con <strong>Mercado Pago</strong> mediante
                 webhooks.
               </li>
               <li>
-                Migración a <strong>Capacitor</strong> y publicación en
+                Empaquetado con <strong>Capacitor</strong> y publicación en
                 <strong>Play Store</strong>.
               </li>
             </ul>
           </div>
         </div>
+      </section>
+
+      <!-- PROYECTOS -->
+      <section class="mt-8">
+        <h2 class="text-2xl font-bold">Proyectos</h2>
+
+        <ul class="list-disc pl-6 mt-4 space-y-2 text-gray-400">
+          <li>
+            <strong>Job Hunter</strong> — Pipeline de búsqueda laboral que agrega
+            ofertas de múltiples fuentes, las normaliza y las puntúa contra un
+            perfil de candidato.
+            <em>Python, FastAPI, SQLAlchemy, Playwright, OpenAI, Next.js.</em>
+          </li>
+          <li>
+            <strong>Portfolio personal</strong> — maxivalfre.github.io.
+            <em>Astro, Tailwind CSS.</em>
+          </li>
+        </ul>
       </section>
 
       <!-- HABILIDADES -->
@@ -227,31 +205,36 @@ import Footer from "../components/Footer.astro";
           <div class="bg-gray-800 p-4 rounded-md">
             <h3 class="font-semibold">Frontend</h3>
             <p class="mt-2 text-gray-400">
-              React, Next.js, Astro, Angular, HTML, CSS, JavaScript, TypeScript
+              React, Next.js, Astro, Angular, TypeScript, JavaScript, Tailwind CSS, HTML/CSS
             </p>
           </div>
 
           <div class="bg-gray-800 p-4 rounded-md">
-            <h3 class="font-semibold">Backend & Cloud</h3>
+            <h3 class="font-semibold">Backend</h3>
             <p class="mt-2 text-gray-400">
-              Node.js, Express, Python, AWS Lambda, API Gateway, S3, Firebase
+              Node.js, Express, Python, FastAPI, APIs REST
             </p>
           </div>
 
           <div class="bg-gray-800 p-4 rounded-md">
-            <h3 class="font-semibold">AI & Automation</h3>
+            <h3 class="font-semibold">Cloud & Datos</h3>
             <p class="mt-2 text-gray-400">
-              OpenAI API (GPT-4o, Vision), Claude, opencode, Make, WhatsApp Business API
+              AWS (Lambda, API Gateway, S3), SQL Server, SQLite, Sequelize, Firebase
             </p>
           </div>
 
           <div class="bg-gray-800 p-4 rounded-md">
-            <h3 class="font-semibold">Data & DevOps</h3>
+            <h3 class="font-semibold">IA & Herramientas</h3>
             <p class="mt-2 text-gray-400">
-              SQL Server, SQLite, Sequelize, Pydantic, Google Sheets API, Docker, CI/CD, Git
+              OpenAI API, Claude, Docker, Git, CI/CD, testing automatizado (pytest)
             </p>
           </div>
         </div>
+
+        <p class="mt-4 text-gray-400">
+          Uso asistentes de IA como parte del flujo diario de desarrollo, con
+          metodologías de planificación estructurada para cambios grandes.
+        </p>
       </section>
 
       <!-- EDUCACIÓN -->
